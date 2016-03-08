@@ -9,7 +9,7 @@ import PySS as ss
 ##
 ## Base name for <NAME>.osm map file 
 ## and generated <NAME>[-ways,-coords,-relations].csv files
-mapname="tinymap" 
+mapname="smallmap" 
 ##
 ## Delimiter for the .csv files 
 ## (default tries to be distinct from anything in any text fields)
@@ -21,7 +21,7 @@ arcangle=45
 ## 30 (degrees) seems about right
 ##
 ## Consider one-way roads or not (True, False)
-oneway=True
+oneway=False
 #######################################
 
 ######################################################################
@@ -55,9 +55,9 @@ ways=osm.getways(mapname)
 ###find all junctions and make list of IDs
 junctions=ss.getjunctions(ways)
 
-
 ###create axial lines and append to end of entries in ways 
 links, axlines, segments = ss.make_segments(coords, ways, junctions, arcangle)
+
 ss.savedata(links, mapname+"-links.csv", delimiter=dl)
 ss.savedata(axlines, mapname+"-axlines.csv", delimiter=dl)
 ss.savedata(segments, mapname+"-segments.csv", delimiter=", ")
@@ -66,7 +66,7 @@ ss.savedata(segments, mapname+"-segments.csv", delimiter=", ")
 axlines=ss.do_integration(mapname, axlines, segments, ways, links, onewayroads=oneway)
 
 ###plot graph and save to file mapname-integration.png
-ss.plotmap(mapname, axlines, segments, coords)
+ss.plotmap(mapname, axlines, segments, coords, figtype="pdf")
 
     
     
