@@ -114,8 +114,6 @@ def make_segments(coords, ways, intersections, arcangle, onewayroads=False):
                 #DO NOT INCREMENT AXIAL LINES HERE
         #check if last waypoint is an intersection
         i=-1
-        #if osm_id == 99856531: print refs[i], segID
-        #if refs[i]=="3575008892": print refs[i], segID0
         segdict[segID].append(refs[i]) #last waypoint for previous segment
         if refs[i] in intersections:# and i<len(refs):            
             if refs[i] in tempdict:
@@ -129,9 +127,6 @@ def make_segments(coords, ways, intersections, arcangle, onewayroads=False):
         else: 
             if not oneway:
                 tempdict[refs[i]] = [segID] 
-            #else
-            #tempdict[refs[i]]=[]
-        #if osm_id == 99856531: print tempdict[refs[i]]
         #record dead-ends
 
     linkdict={}
@@ -268,7 +263,6 @@ def plotmap(mapname, axlines, segments, coords, figtype="png"):
             x1, y1 = coords[n1]
             x2, y2 = coords[n2]
             axes.plot([x1,x2], [y1,y2], color=sm.to_rgba(cval), linewidth=3)
-        #axes.text((x2+x1)/2.0, (y2+y1)/2.0, a, size=5)
     axes.set_xlabel("Longitude")
     axes.set_ylabel("Latitude")
     cb=plt.colorbar(sm, ax=axes)
